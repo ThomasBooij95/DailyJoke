@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import numpy as np 
 
+# $some commetns
 def get_page_content():
 	#gets page content with 99 beautiful jokes hidden in the html soup
 	#Gives 0 for error
