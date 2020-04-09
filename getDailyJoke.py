@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import numpy as np 
+from joke.models import Joke
 
 # $some commetns
 def get_page_content():
@@ -31,6 +32,7 @@ def parse_jokes(foundJokes):
 foundJokes = get_page_content()
 parsedJokes = parse_jokes(foundJokes)
 
+
 #prints all jokes
 for joke in parsedJokes:
-	print(joke)
+	Joke.objects.create(joke = joke)
