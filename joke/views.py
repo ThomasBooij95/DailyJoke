@@ -15,7 +15,6 @@ def joke_view(request):
 
 
 
-from datetime import datetime,date
 
 def days_between(d1,d2):
     d1 = datetime.strptime(d1, "%Y-%m-%d")
