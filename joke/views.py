@@ -4,7 +4,7 @@ from .models import Joke
 
 
 def joke_view(request):
-    joke = Joke.objects.get(id=1)
+    joke = Joke.objects.get(id=2)
     context = {
         "joke" : joke.joke
     }
