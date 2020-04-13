@@ -8,4 +8,4 @@ def joke_view(request):
     context = {
         "joke" : joke.joke
     }
-    return render(request, 'joke_template.html', context)
+    return render(request, 'base.html', context)
