@@ -5,9 +5,29 @@ from datetime import datetime, date
 
 
 def joke_view(request):
-    joke = Joke.objects.get(id=3)
+    jokeId = getJokeId()
+    allJokes = Joke.objects.all()
+    joke = allJokes[jokeId]
     context = {
         "joke" : joke.joke
     }
     return render(request, 'base.html', context)
+
+
+
+from datetime import datetime,date
+
+def days_between(d1,d2):
+    d1 = datetime.strptime(d1, "%Y-%m-%d")
+    d2 = datetime.strptime(d2, "%Y-%m-%d")
+    return abs((d2 - d1).days)
+
+
+
+def getJokeId():
+    today = date.today().strftime("%Y-%m-%d")
+    date_begin= '2020-04-11'
+    jokeNr = days_between(today,date_begin)%100
+    return jokeNr
+
 

@@ -29,7 +29,8 @@ SECRET_KEY = 'm)aw(gj-e&2!gmrtqw(jd6na(k2o)u_gl#*ug*fwdw^h4%)(j#'
 DEBUG = True
 
 ALLOWED_HOSTS =  [
-       'dailydadgag.pythonanywhere.com' 
+       'dailydadgag.pythonanywhere.com',
+       '127.0.0.1'
         ]
 
 
