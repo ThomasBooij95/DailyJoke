@@ -9,7 +9,8 @@ def joke_view(request):
     allJokes = Joke.objects.all()
     joke = allJokes[jokeId]
     context = {
-        "joke" : joke.joke
+        "joke" : joke.joke,
+        "likes": joke.likes
     }
     return render(request, 'base.html', context)
 
