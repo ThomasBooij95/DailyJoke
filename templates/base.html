@@ -35,12 +35,8 @@
                 /*justify-content: center;*/
                 /*align-items:center;*/
             }
-            div.relative {
-              position: relative;
-              left: 30px;
-              margin-left: -20%;
-              
-            }
+            .top-buffer { margin-top: 100px; }
+            .button-center{ text-align: center; }
         </style>
     </head>
     <body> 
@@ -49,10 +45,8 @@
         <!-- Maak bootstrap container -->
         <div class="container">
             <!-- 25% can scherm leeg -->
-            <div class="h-25 row">
-            </div>
-
-            <div class="row">
+            <!-- <div class=" row"><div class="col"></div></div> -->
+            <div class="row top-buffer">
                 <!-- lege zij column links -->
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10" >
@@ -66,7 +60,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-9" id="commend-col"></div>
                 <div class="col-sm-1" id="button-col">
-                    <button type="button" class="btn btn-outline-success btn-block"> Like! </button>
+                    <button id="like-button" type="button" class="btn btn-outline-success btn-block text-center"> Like! </button>
                 </div>
                 <!-- lege zij column rechts -->
                 <div class="col-sm-1"></div>
