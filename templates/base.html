@@ -24,10 +24,15 @@
                 background-repeat: no-repeat;
                 background-size: cover;
             }
-            p { 
+            .joke-text { 
             opacity: 1.0;
             font-size: 30px;
             color: white;
+            }
+            .like-text{
+                opacity: 1.0;
+                font-size: 16px;
+                color: white;
             }
             #text-block {
                 background: rgba(0,0,0, 0.3); /* Blue background with 30% opacity */
@@ -56,7 +61,7 @@
                 <!-- lege zij column links -->
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10" >
-                    <p id="text-block">{{joke}}</p>
+                    <p id="text-block" class=joke-text>{{joke}}</p>
                 </div>
                 <!-- lege zij column rechts -->
                 <div class="col-sm-1"></div>
@@ -64,10 +69,13 @@
             <div class="row">
                 <!-- lege zij column links -->
                 <div class="col-sm-1"></div>
-                <div class="col-sm-9" id="commend-col"></div>
+                <div class="col-sm-7" id="commend-col"></div>
+                <div class="col-sm-2 text-right align-middle" id="commend-col">
+                    <p class="like-text">{{likes}} Likes</p>
+                </div>
                 <div class="col-sm-1" id="button-col">
                     <button type="button" class="btn btn-outline-success btn-block"> Like! </button>
-                    <p>Amount of likes: {{likes}}</p>
+                    
                 </div>
                 <!-- lege zij column rechts -->
                 <div class="col-sm-1"></div>
