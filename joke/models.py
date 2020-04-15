@@ -6,5 +6,6 @@ from django.urls import reverse
 
 class Joke(models.Model):
     joke = models.TextField()
+    likes = models.IntegerField(default=0)
     # description = models.TextField(blank=True, null=True)
     
