@@ -1,0 +1,37 @@
+Questions to answer about the database design:
+
+What is it for?
+  - Keep track of comments on jokes. 
+
+What do you have?
+  - No database yet. 
+
+What tables do you need? "You have to create a table for every entity, the tables are the basic building blocks of the database. Each object or thing that needs to be represented in your system."
+  - Joke
+  - Comment
+  - User
+
+Tables can be categorized in Schemas. E.g. User.comments, joke.comments. This is not needed in small databases. 
+
+What columns do you need?
+Store your columns as granular as possible. First_name, Last_name instead of name
+
+Every row in every table needs a primary key that uniquely defines this row. 
+
+What relationships do you need?
+Never duplicate entries, remove as much redundancy in you database as possible. 
+
+The database needs to adhere to the 4 normal forms:
+1. only one dataentry per cell
+2. no partial dependency.
+3. no transitive dependency.
+4. A non-key attribute cannot determine a partial key.
+
+notes:
+the primary key can consist of multiple columns
+
+What is the difference between a database and a spreadsheet?
+- with a database we can make very specific queries in large amounts of data.
+-give specific users different permissions in the database: security feature
+- a database stores attributes from entities. a row is also referred to as a tuple. :
+
