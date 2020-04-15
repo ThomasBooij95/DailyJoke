@@ -9,3 +9,8 @@ class Joke(models.Model):
     likes = models.IntegerField(default=0)
     # description = models.TextField(blank=True, null=True)
     
+    def addLike(self):
+        self.likes = self.likes + 1
+        self.save()
+
+    

@@ -30,4 +30,23 @@ def getJokeId():
     jokeNr = days_between(today,date_begin)%100
     return jokeNr
 
+def like(request):
+    if request.method=="POST":
+        jokeID = getJokeId()
+        jokes = Joke.objects.all()
+        joke = jokes[jokeID]
+        joke.addLike()
+        print("Likes: ", joke.likes)
+    else:
+        jokeID = getJokeId()
+        joke = jokes[jokeID]
+
+    context = {
+    "joke" : joke.joke,
+    "likes": joke.likes
+    }
+    return render(request, 'base.html', context)
+
+
+
 

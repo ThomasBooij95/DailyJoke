@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from joke.views import joke_view
+from joke.views import joke_view, like
+
 
 urlpatterns = [
     path('', joke_view, name='home'),
     path('admin/', admin.site.urls),
+    path('like', like)
 ]
