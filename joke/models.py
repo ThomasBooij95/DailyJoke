@@ -13,4 +13,12 @@ class Joke(models.Model):
         self.likes = self.likes + 1
         self.save()
 
+       
+class Comment(models.Model):
+    joke = models.ForeignKey(Joke,on_delete=models.CASCADE)
+    text = models.TextField()
+    likes = models.IntegerField(default=0)    
     
+    def addLike(self):
+        self.likes = self.likes + 1
+        self.save()

@@ -1,21 +1,28 @@
 from django.shortcuts import render
-from .models import Joke
+from .models import Joke,Comment
 from datetime import datetime, date
 # Create your views here.
 
 
 def joke_view(request):
-    jokeId = getJokeId()
+    jokeNumber = getJokeNumber()
     allJokes = Joke.objects.all()
-    joke = allJokes[jokeId]
+    joke = allJokes[jokeNumber]
+    jokeId = joke.id
+    comments = getComments(jokeId)
     context = {
         "joke" : joke.joke,
-        "likes": joke.likes
+        "likes": joke.likes,
+        "commentText" : comments[0].text
     }
     return render(request, 'base.html', context)
 
 
-
+def getComments(jokeId):
+    allComments = Comment.objects.filter(joke_id = jokeId)
+    print(jokeId)
+    print(allComments)
+    return allComments
 
 def days_between(d1,d2):
     d1 = datetime.strptime(d1, "%Y-%m-%d")
@@ -24,7 +31,7 @@ def days_between(d1,d2):
 
 
 
-def getJokeId():
+def getJokeNumber():
     today = date.today().strftime("%Y-%m-%d")
     date_begin= '2020-04-10'
     jokeNr = days_between(today,date_begin)%100
