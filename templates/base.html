@@ -60,7 +60,11 @@
             </div>
             <div class="row side-buffers">
                 <!-- lege zij column links -->
-				<div class="col-8" id="comment-col"> <p class="like-text"> The comment section:{{commentText}}</p></div>
+				<div class="col-8" id="comment-col"> <p class="like-text"> The comment section:
+                {% for comment in comments %}
+                    {{comment}}
+                {% endfor %}
+            </p></div>
 				
                 <div class="col-2" id="commend-col">
                     <p class="like-text">{{likes}} Likes</p>

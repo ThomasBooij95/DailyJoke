@@ -13,16 +13,19 @@ def joke_view(request):
     context = {
         "joke" : joke.joke,
         "likes": joke.likes,
-        "commentText" : comments[0].text
-    }
+        "comments" : comments
+        }
     return render(request, 'base.html', context)
 
 
 def getComments(jokeId):
     allComments = Comment.objects.filter(joke_id = jokeId)
-    print(jokeId)
-    print(allComments)
-    return allComments
+    commentArray  = []
+
+    for comment in allComments:
+        commentArray.append(comment.text)
+
+    return commentArray
 
 def days_between(d1,d2):
     d1 = datetime.strptime(d1, "%Y-%m-%d")
@@ -33,20 +36,21 @@ def days_between(d1,d2):
 
 def getJokeNumber():
     today = date.today().strftime("%Y-%m-%d")
-    date_begin= '2020-04-10'
+    date_begin= '2020-05-10'
     jokeNr = days_between(today,date_begin)%100
     return jokeNr
 
+
 def like(request):
     if request.method=="POST":
-        jokeID = getJokeId()
+        jokeNumber = getJokeNumber()
         jokes = Joke.objects.all()
-        joke = jokes[jokeID]
+        joke = jokes[jokeNumber]
         joke.addLike()
         print("Likes: ", joke.likes)
     else:
-        jokeID = getJokeId()
-        joke = jokes[jokeID]
+        jokeNumber = getJokeNumber()
+        joke = jokes[jokeNumber]
 
     context = {
     "joke" : joke.joke,

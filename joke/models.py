@@ -12,6 +12,11 @@ class Joke(models.Model):
     def addLike(self):
         self.likes = self.likes + 1
         self.save()
+    def addJoke(self, jokeText):
+        self.joke = jokeText
+        self.save()
+
+
 
        
 class Comment(models.Model):
