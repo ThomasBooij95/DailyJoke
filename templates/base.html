@@ -1,4 +1,6 @@
 {% load static %}
+{% load humanize %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -68,15 +70,15 @@
           </div>
 
           {% for comment in comments %}
-          <div class="comment-box">
-            <span class="commenter-pic">
-              <img src="{% static "joke/img/anonymous_dad.jpg" %}" class="img-fluid">
-            </span>
-            <span class="commenter-name">
-              <a href="#">{{comment.author}}></span>
-            </span>
-            <p class="comment-txt more">{{comment.text}}</p>                    
-          </div>
+              <div class="comment-box">
+                <span class="commenter-pic">
+                  <img src="{% static "joke/img/anonymous_dad.jpg" %}" class="img-fluid">
+                </span>
+                <span class="commenter-name">
+                  <a href="#">{{comment.author}}</a><span class="comment-time">{{comment.datetime|timesince}} ago</span>
+              </span>
+                <p class="comment-txt more">{{comment.text}}</p>                    
+              </div>
           {% endfor %}
           
           

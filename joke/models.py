@@ -24,7 +24,14 @@ class Comment(models.Model):
     text = models.TextField()
     likes = models.IntegerField(default=0)    
     author = models.TextField(default = "Anonymous Dad")
+    datetime = models.DateTimeField(auto_now_add=True)
     
     def addLike(self):
         self.likes = self.likes + 1
         self.save()
+
+    class Meta:
+       ordering = ['-datetime']
+
+    def __unicode__(self):
+       return unicode(self.name)
