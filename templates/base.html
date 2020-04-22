@@ -51,7 +51,7 @@
           </div>
           <div class="comment-box add-comment">
             <span class="commenter-pic">
-              <img src="{% static "joke/img/anonymous_dad.jpg" %}" alt="Anonymous Dad" class="img-fluid">
+              <img src="{% static "joke/img/anonymous_dad.jpeg" %}" alt="Anonymous Dad" class="img-fluid">
             </span>
             <span class="commenter-name">
               
@@ -72,7 +72,7 @@
           {% for comment in comments %}
               <div class="comment-box">
                 <span class="commenter-pic">
-                  <img src="{% static "joke/img/anonymous_dad.jpg" %}" class="img-fluid">
+                  <img src="{% static "joke/img/anonymous_dad.jpeg" %}" class="img-fluid">
                 </span>
                 <span class="commenter-name">
                   <a href="#">{{comment.author}}</a><span class="comment-time">{{comment.datetime|timesince}} ago</span>
