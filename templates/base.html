@@ -66,42 +66,18 @@
                 {% endfor %}
             </p></div>
 				
+                {}
                 <div class="col-2" id="commend-col">
                     <p class="like-text">{{likes}} Likes</p>
                 </div>
+
                 <div class="col-2" id="button-col">
-                    <form method="POST" action="/like">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-success btn-block"> Like! </button>
-                    </form>
+                    {% block like_button %}
+                    {% endblock %}
                 </div>
-                
             </div>
 
-            <!-- <div class="row side-buffers">
-                
-                <div class="col-8" id="comment-col"> <p class="like-text"> The </p></div>
-                <div class="col-2" id="commend-col">
-                    <p class="like-text">{{likes}} Likes</p>
-                </div>
-                <div class="col-2" id="button-col">
-                    <form method="POST" action="/like">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-success btn-block"> Like! </button>
-                    </form>
-                </div>
-                
-            </div> -->
-
         </div>
-
-        {# <div id="text-block" class="align-middle" > #}
-        {#  <p>{{joke}}</p> #}
-        {# </div> #}
-        {# {% block content %} #}
-        {# replace me #}
-        {# {% endblock %} #}
-        {#  #}
         <!-- Add bootstrap javascript files -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

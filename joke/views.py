@@ -3,8 +3,7 @@ from .models import Joke,Comment
 from datetime import datetime, date
 # Create your views here.
 
-
-def joke_view(request):
+def getContext():
     jokeNumber = getJokeNumber()
     allJokes = Joke.objects.all()
     joke = allJokes[jokeNumber]
@@ -15,7 +14,11 @@ def joke_view(request):
         "likes": joke.likes,
         "comments" : comments
         }
-    return render(request, 'base.html', context)
+    return context
+
+def home_view(request):
+    context = getContext()
+    return render(request, 'home.html', context)
 
 
 def getComments(jokeId):
@@ -41,7 +44,7 @@ def getJokeNumber():
     return jokeNr
 
 
-def like(request):
+def like_view(request):
     if request.method=="POST":
         jokeNumber = getJokeNumber()
         jokes = Joke.objects.all()
@@ -52,12 +55,8 @@ def like(request):
         jokeNumber = getJokeNumber()
         joke = jokes[jokeNumber]
 
-    context = {
-    "joke" : joke.joke,
-    "likes": joke.likes
-    }
-    return render(request, 'base.html', context)
-
+    context = getContext()
+    return render(request, 'liked.html', context)
 
 
 
