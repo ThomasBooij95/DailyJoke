@@ -33,14 +33,3 @@ color: white;
 .side-buffers{margin-right: 2%;margin-left: 2%;}
 .left_buffer{margin-left: 2%;}
 .right_buffer{margin-right: 2%;}
-
-div.fadeMe {
-  opacity:    0.5; 
-  background: #000; 
-  width:      100%;
-  height:     100%; 
-  z-index:    10;
-  top:        0; 
-  left:       0; 
-  position:   fixed; 
-}

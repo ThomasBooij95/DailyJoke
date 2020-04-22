@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Joke,Comment
 from datetime import datetime, date
 from register.forms import RegisterForm
+from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
 def getContext():
@@ -10,12 +11,14 @@ def getContext():
     joke = allJokes[jokeNumber]
     jokeId = joke.id
     comments = getComments(jokeId)
-    form =RegisterForm()
+    registerForm =RegisterForm()
+    authenticationForm =AuthenticationForm()
     context = {
         "joke" : joke.joke,
         "likes": joke.likes,
         "comments" : comments,
-        "form": form,
+        "authenticationForm": authenticationForm,
+        "registerForm": registerForm,
         }
     return context
 

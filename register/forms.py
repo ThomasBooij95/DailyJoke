@@ -10,6 +10,7 @@ class RegisterForm(UserCreationForm):
 	class Meta:
 		#saves as if it is a user object as UserCreationForm does
 		model = User
-
+		
 		#specifies in what worder these predefined fields show 
 		fields = ["username", "email", "password1", "password2"]
+
