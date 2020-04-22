@@ -23,6 +23,7 @@ class Comment(models.Model):
     joke = models.ForeignKey(Joke,on_delete=models.CASCADE)
     text = models.TextField()
     likes = models.IntegerField(default=0)    
+    author = models.TextField(default = "Anonymous Dad")
     
     def addLike(self):
         self.likes = self.likes + 1
