@@ -1,96 +1,140 @@
 {% load static %}
 {% load humanize %}
-
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Add bootstrap for nice styling -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        
-        <title>Daily Joke</title>
+<head>
+  <!-- Add bootstrap for nice styling -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <title>Daily Joke</title>
 
 
-        <link rel="stylesheet" type="text/css" href="{% static "joke/css/comments.css" %}">
-        <link rel="stylesheet" type="text/css" href="{% static "joke/css/base.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "joke/css/comments.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "joke/css/base.css" %}">
 
-    </head>
-    <body> 
+  <link rel="stylesheet" type="text/css" href="{% static "register/css/register.css" %}"> 
+
+</head>
+<body> 
 
 
-        <!-- Maak bootstrap container -->
-        <div class="container-fluid">
-            <!-- 25% can scherm leeg -->
-            <div class="row top-buffer side-buffers" >
-                <div class="col" >
-                    <p id="text-block" class=joke-text>{{joke}}</p>
-                </div>
-            </div>
-            <div class="row side-buffers">
-                
-			     <div class="col-8" id="comment-col"></div>
-				
-                <div class="col-2" id="commend-col">
-                    <p class="like-text">{{likes}} Likes</p>
-                </div>
+  <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
 
-                <div class="col-2" id="button-col">
-                    {% block like_button %}
-                    {% endblock %}
-                </div>
-            </div>
+          <form method="POST" class="form-group" action="/register">
+            {% csrf_token %}
+
+            {{form|crispy}}
+
+            <button type="submit" class = "btn btn-primary">Submit</button>
+          </form>
 
         </div>
-<div class="container side-buffers scrollable">
-  <div class="row">
-    <div class="col-12" >
-      <div class="comments" >
-        <div class="comments-details">
-          <span class="total-comments comments-sort">TODO TOTAL COMMENTS</span>
-          </div>
-          <div class="comment-box add-comment">
-            <span class="commenter-pic">
-              <img src="{% static "joke/img/anonymous_dad.jpeg" %}" alt="Anonymous Dad" class="img-fluid">
-            </span>
-            <span class="commenter-name">
-              
-
-
-                <form method="POST" action="/comment">
-                    {% csrf_token %}
-                    <input type="text" placeholder="Add a public comment" name="Add Comment">
-                    <button type="submit" class="btn btn-default">Comment</button>
-
-                </form>
-              
-
-              <button type="cancel" class="btn btn-default">Cancel</button>
-            </span>
-          </div>
-
-          {% for comment in comments %}
-              <div class="comment-box">
-                <span class="commenter-pic">
-                  <img src="{% static "joke/img/anonymous_dad.jpeg" %}" class="img-fluid">
-                </span>
-                <span class="commenter-name">
-                  <a href="#">{{comment.author}}</a><span class="comment-time">{{comment.datetime|timesince}} ago</span>
-              </span>
-                <p class="comment-txt more">{{comment.text}}</p>                    
-              </div>
-          {% endfor %}
-          
-          
+        <div class="modal-footer d-flex justify-content-center">
+          <button class="btn btn-default">Login</button>
         </div>
       </div>
     </div>
   </div>
-</div>
-        <script src="{% static "joke/jss/comments.jss" %}"></script>
-        <!-- Add bootstrap javascript files -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    </body>
+
+  <!-- Maak bootstrap container -->
+  <div class="container-fluid">
+    <!-- 25% can scherm leeg -->
+    <div class="row top-buffer side-buffer" >
+      <div class="col-10" >
+        <p id="text-block" class=joke-text>{{joke}}</p>
+      </div>
+      {# login and register #}
+      <div class="col-2">
+        <div class ="row-fluid">
+
+          <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">Login</a>
+          <div class = "row-fluid" style="margin-top: 2%">
+            {# <form method="POST" action="/register"> #}
+              {# {% csrf_token %} #}
+              <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalRegisterForm">Register</a>
+              {# <button type="submit" class="btn btn-primary btn-block"> Register </button> #}
+            {# </form>   #}
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="row side-buffers">
+
+        <div class="col-8" id="comment-col"></div>
+
+        <div class="col-2" id="commend-col">
+          <p class="like-text">{{likes}} Likes</p>
+        </div>
+
+        <div class="col-2" id="button-col">
+          {% block like_button %}
+          {% endblock %}
+        </div>
+      </div>
+
+    </div>
+    <div class="container side-buffers scrollable" style="margin-top: 2%">
+      <div class="row">
+        <div class="col-12" >
+          <div class="comments" >
+            <div class="comments-details">
+              <span class="total-comments comments-sort">TODO TOTAL COMMENTS</span>
+            </div>
+            <div class="comment-box add-comment">
+              <span class="commenter-pic">
+                <img src="{% static "joke/img/anonymous_dad.jpeg" %}" alt="Anonymous Dad" class="img-fluid">
+              </span>
+              <span class="commenter-name">
+
+
+
+                <form method="POST" action="/comment">
+                  {% csrf_token %}
+                  <input type="text" placeholder="Add a public comment" name="Add Comment">
+                  <button type="submit" class="btn btn-default">Comment</button>
+
+                </form>
+
+
+                <button type="cancel" class="btn btn-default">Cancel</button>
+              </span>
+            </div>
+
+            {% for comment in comments %}
+            <div class="comment-box">
+              <span class="commenter-pic">
+                <img src="{% static "joke/img/anonymous_dad.jpeg" %}" class="img-fluid">
+              </span>
+              <span class="commenter-name">
+                <a href="#">{{comment.author}}</a><span class="comment-time">{{comment.datetime|timesince}} ago</span>
+              </span>
+              <p class="comment-txt more">{{comment.text}}</p>                    
+            </div>
+            {% endfor %}
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{% static "joke/jss/comments.jss" %}"></script>
+  <!-- Add bootstrap javascript files -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
 </html>

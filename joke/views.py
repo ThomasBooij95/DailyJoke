@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Joke,Comment
 from datetime import datetime, date
+from register.forms import RegisterForm
 # Create your views here.
 
 def getContext():
@@ -9,10 +10,12 @@ def getContext():
     joke = allJokes[jokeNumber]
     jokeId = joke.id
     comments = getComments(jokeId)
+    form =RegisterForm()
     context = {
         "joke" : joke.joke,
         "likes": joke.likes,
-        "comments" : comments
+        "comments" : comments,
+        "form": form,
         }
     return context
 
@@ -71,9 +74,6 @@ def comment_view(request):
 
         commentObject = Comment(text = commentText, joke = currentJoke)
         commentObject.save()
-
-        
-
     else:
         jokeNumber = getJokeNumber()
         jokes = Joke.objects.all()
