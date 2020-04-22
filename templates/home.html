@@ -2,7 +2,7 @@
 
 {% block like_button %}
 
-<form method="POST" action="/like">
+<form method="POST" action="/liked">
     {% csrf_token %}
     <button type="submit" class="btn btn-outline-success btn-block"> Like! </button>
 </form>

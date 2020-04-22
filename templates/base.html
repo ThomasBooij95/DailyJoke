@@ -12,6 +12,7 @@
         <style>
             body, html {
             height: 100%;
+            overflow: hidden;
             }
             body {
                 /* The image used */
@@ -187,29 +188,26 @@
                 <div class="col" >
                     <p id="text-block" class=joke-text>{{joke}}</p>
                 </div>
-            
             </div>
             <div class="row side-buffers">
-                <!-- lege zij column links -->
-				<div class="col-8" id="comment-col"> <p class="like-text"> The comment section:
                 
-            </div>
+			     <div class="col-8" id="comment-col"></div>
 				
                 <div class="col-2" id="commend-col">
                     <p class="like-text">{{likes}} Likes</p>
                 </div>
 
                 <div class="col-2" id="button-col">
-                    {% block like_button %}static/img/anonymous_dad.jpg
+                    {% block like_button %}
                     {% endblock %}
                 </div>
             </div>
 
         </div>
-		<div class="container">
+<div class="container side-buffers" style="overflow-y: scroll; height: 100%; position: absolute;">
   <div class="row">
-    <div class="col-12">
-      <div class="comments">
+    <div class="col-12" >
+      <div class="comments" >
         <div class="comments-details">
           <span class="total-comments comments-sort">TODO TOTAL COMMENTS</span>
           </div>
@@ -218,8 +216,17 @@
               <img src="{% static "joke/img/anonymous_dad.jpg" %}" alt="Anonymous Dad" class="img-fluid">
             </span>
             <span class="commenter-name">
-              <input type="text" placeholder="Add a public comment" name="Add Comment">
-              <button type="submit" class="btn btn-default">Comment</button>
+              
+
+
+                <form method="POST" action="/comment">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Add a public comment" name="Add Comment">
+                    <button type="submit" class="btn btn-default">Comment</button>
+
+                </form>
+              
+
               <button type="cancel" class="btn btn-default">Cancel</button>
             </span>
           </div>
@@ -230,13 +237,13 @@
               <img src="{% static "joke/img/anonymous_dad.jpg" %}" class="img-fluid">
             </span>
             <span class="commenter-name">
-              <a href="#">Happy uiuxStream</a></span>
+              <a href="#">{{comment.author}}></span>
             </span>
-            <p class="comment-txt more">{{comment}}</p>                    
-          
+            <p class="comment-txt more">{{comment.text}}</p>                    
+          </div>
           {% endfor %}
           
-          </div>
+          
         </div>
       </div>
     </div>

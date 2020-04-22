@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Joke,Comment
 from datetime import datetime, date
 # Create your views here.
@@ -26,7 +26,7 @@ def getComments(jokeId):
     commentArray  = []
 
     for comment in allComments:
-        commentArray.append(comment.text)
+        commentArray.append(comment)
 
     return commentArray
 
@@ -53,10 +53,46 @@ def like_view(request):
         print("Likes: ", joke.likes)
     else:
         jokeNumber = getJokeNumber()
+        jokes = Joke.objects.all()
         joke = jokes[jokeNumber]
 
     context = getContext()
     return render(request, 'liked.html', context)
 
+
+def comment_view(request):
+    if request.method== "POST":
+        commentText = request.POST.get("Add Comment")
+        print(commentText)
+
+        jokeNumber = getJokeNumber()
+        jokes = Joke.objects.all()
+        currentJoke = jokes[jokeNumber]
+
+        commentObject = Comment(text = commentText, joke = currentJoke)
+        commentObject.save()
+
+        
+
+    else:
+        jokeNumber = getJokeNumber()
+        jokes = Joke.objects.all()
+        joke = jokes[jokeNumber]
+
+    context = getContext()
+
+    url = request.META.get("HTTP_REFERER")
+    refer = parse_refer(url)
+
+    if refer == '':
+        return redirect("/")
+    elif refer == 'liked':
+        return redirect('/liked')
+    else:
+        return redirect("/")
+
+def parse_refer(url):
+    split = url.split('/')
+    return split[-1]
 
 
