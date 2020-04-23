@@ -1,17 +1,16 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% load crispy_forms_tags %}
 
-{% block loginform %}
+{% block registrationform %}
 
 
-    {# AUTHENTICATION FORM tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" {# role="document" #}
-  <div class="modal fade in show" id="modalAuthenticationForm" role="dialog" style="display: block">
+  <div class="modal fade in show" id="modalRegistrationForm" role="dialog" style="display: block">
     <div class="modal-dialog" >
       <div class="modal-content">
         <div class="modal-header text-center">
-          <h4 class="modal-title w-100 font-weight-bold">Log in</h4>
-          <a href="/" class="close" aria-label="Close"></a>
+          <h4 class="modal-title w-100 font-weight-bold">Sign Up</h4>
+            <a href="/" class="close" aria-label="Close"></a>
             <span>&times;</span>
         </div>
 	        <div class="modal-body mx-3">
@@ -21,6 +20,7 @@
 	            {{form|crispy}}
 
 	            <button type="submit" class = "btn btn-primary">Submit</button>
+
 	          </form>
 
         </div>
