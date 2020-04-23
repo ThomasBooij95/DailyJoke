@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect
-from .models import Joke,Comment
+from .models import Joke,Comment,Like
 from datetime import datetime, date
 # Create your views here.
 
-def getContext():
+def getContext(request):
     jokeNumber = getJokeNumber()
     allJokes = Joke.objects.all()
     joke = allJokes[jokeNumber]
     jokeId = joke.id
+
     comments = getComments(jokeId)
+    likedJoke = 
     context = {
         "joke" : joke.joke,
         "likes": joke.likes,
@@ -17,7 +19,7 @@ def getContext():
     return context
 
 def home_view(request):
-    context = getContext()
+    context = getContext(request)
     return render(request, 'home.html', context)
 
 
