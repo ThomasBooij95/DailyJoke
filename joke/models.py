@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -21,9 +22,10 @@ class Joke(models.Model):
        
 class Comment(models.Model):
     joke = models.ForeignKey(Joke,on_delete=models.CASCADE)
+    author = models.TextField(default = "Anonymous Dad")
     text = models.TextField()
     likes = models.IntegerField(default=0)    
-    author = models.TextField(default = "Anonymous Dad")
+    
     datetime = models.DateTimeField(auto_now_add=True)
     
     def addLike(self):
@@ -35,3 +37,16 @@ class Comment(models.Model):
 
     def __unicode__(self):
        return unicode(self.name)
+
+class Like(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    datetime = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        abstract = True
+
+class JokeLike(Like):
+    joke = models.ForeignKey(Joke,on_delete=models.CASCADE)
+
+# class CommentLike(Like):
+#     comment =  models.ForeignKey(Comment,on_delete=models.CASCADE)
