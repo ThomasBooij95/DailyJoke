@@ -5,31 +5,31 @@
 {% load static %}
 
   <!-- Maak bootstrap container -->
-  <div class="container-fluid side-buffer">
+  <div class="container-fluid top-buffer side-buffers">
     <!-- 25% can scherm leeg -->
     <div class="row container">
-      <div class="row top-buffer " >
+      <div class="row" >
         <div class="col-md-10 col-xs-12" >
-          <p id="text-block" class="joke-text text-justify">{{joke}}</p>
+          <p id="text-block" class="joke-text">{{joke}}</p>
         </div>
         {# login and register #}
-        <div class="col-md-2 col-xs-12">
-        
-          	{% if user.is_authenticated %}
-          		<p class="text-center" style="color: white">Hi {{user.username}}!</p>
-          	{% else %}
-  	          {# <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalAuthenticationForm">Login</a> #}
-              <div class ="row-fluid">
-  	           <a href="/login" class="btn btn-primary btn-block">Log in</a>
-              </div>
-  	          <div class = "row-fluid" style="margin-top: 2%">
-  	             <a href="/register" class="btn btn-primary btn-block">Register</a>
-              </div>
-  	        {% endif %}
-            
-        </div>
+      	{% if user.is_authenticated %}
+           <div class="col-md-2 d-none d-md-block">
+      		    <p class="text-center" style="color: white">Hi {{user.username}}!</p>
+          </div>  
+      	{% else %}
+         <div class="col-md-2 col-xs-12">
+          {# <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalAuthenticationForm">Login</a> #}
+            <div class ="row-fluid">
+             <a href="/login" class="btn btn-primary btn-block">Log in</a>
+            </div>
+            <div class = "row-fluid" style="margin-top: 2%">
+               <a href="/register" class="btn btn-primary btn-block">Register</a>
+            </div>
+          </div>
+        {% endif %}
 
-      <div class="col-md-8 hidden-xs"></div>
+      <div class="col-md-8 d-none d-sm-block"></div>
 
       <div class="col-md-2 col-xs-12 pull-right">
         <p class="like-text text-center">{{likes}} Likes</p>
@@ -55,9 +55,9 @@
     </div>
     
 
-    <div class="container side-buffers" style="margin-top: 2%">
+    <div class="container side-buffers scrollable" style="margin-top: 2%">
       <div class="row">
-        <div class="col-12 scrollable" >
+        <div class="col-md-12 col-xs-12 " >
           <div class="comments" >
             <div class="comment-box add-comment">
 
@@ -79,7 +79,7 @@
 		              </span>		              	
 		              
 	                  <input id="commentText" type="text" placeholder="Only Dads can comment" name="Add Comment">
-	                  <button class="btn btn-primary">Comment</button>
+	                  <button type="submit" class="btn btn-primary" onClick="notADad()">Comment</button>
 	            {% endif %}
 
             </div>
@@ -114,6 +114,9 @@
         return false;
     };
 	}
+  function notADad(){alert("You ain't no dad!");}
+
+  
 	</script>
 
 {% endblock %}
