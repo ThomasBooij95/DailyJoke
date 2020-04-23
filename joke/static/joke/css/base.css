@@ -29,7 +29,15 @@ color: white;
     /*justify-content: center;*/
     /*align-items:center;*/
 }
+
+.like-number{
+    font-size: 15px;
+    color: green;
+    font-weight: bold;
+}
+
 .top-buffer{margin-top: 10px;}
+
 .side-buffers{margin-right: 2%;margin-left: 2%;}
 .left_buffer{margin-left: 2%;}
 .right_buffer{margin-right: 2%;}
