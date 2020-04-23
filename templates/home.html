@@ -1,10 +1,133 @@
 {% extends 'base.html'%}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block home_content %}
+{% load static %}
 
-{% block like_button %}
 
-<form method="POST" action="/liked">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-outline-success btn-block"> Like! </button>
-</form>
+
+
+
+{# REGISTER FORM #}
+  <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
+
+          <form id="registerForm" method="POST" class="form-group" action="/register">
+            {% csrf_token %}
+
+            {{registerForm|crispy}}
+
+            <button type="submit" class = "btn btn-primary">Submit</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Maak bootstrap container -->
+  <div class="container-fluid">
+    <!-- 25% can scherm leeg -->
+  <p style="color: white">{{user.username}}</p>
+    <div class="row top-buffer side-buffer" >
+      <div class="col-10" >
+        <p id="text-block" class=joke-text>{{joke}}</p>
+      </div>
+      {# login and register #}
+      <div class="col-2">
+        <div class ="row-fluid">
+
+        	{% if user.is_authenticated %}
+        		<p style="color: white">Hi {{user.username}}!</p>
+        	{% else %}
+	          {# <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalAuthenticationForm">Login</a> #}
+	          <a href="/login" class="btn btn-primary">Log in</a>
+
+	          <div class = "row-fluid" style="margin-top: 2%">
+	            {# <form method="POST" action="/register"> #}
+	              {# {% csrf_token %} #}
+	              <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalRegisterForm">Register</a>
+	              {# <button type="submit" class="btn btn-primary btn-block"> Register </button> #}
+	            {# </form>   #}
+	           {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="row side-buffers">
+
+        <div class="col-8" id="comment-col"></div>
+
+        <div class="col-2" id="commend-col">
+          <p class="like-text">{{likes}} Likes</p>
+        </div>
+
+        <div class="col-2" id="button-col">
+
+        	<form method="POST" action="/liked">
+			    {% csrf_token %}
+			    <button type="submit" class="btn btn-outline-success btn-block"> Like! </button>
+			</form>
+          {% block like_button %}
+          {% endblock %}
+        </div>
+      </div>
+
+    </div>
+    <div class="container side-buffers scrollable" style="margin-top: 2%">
+      <div class="row">
+        <div class="col-12" >
+          <div class="comments" >
+            <div class="comment-box add-comment">
+
+              	{% if user.is_authenticated %}
+		             <span class="commenter-pic">
+		                <img src="{% static "joke/img/anonymous_dad.jpeg" %}" alt="Anonymous Dad" class="img-fluid">
+		              </span>
+		              <span class="commenter-name">
+	                <form method="POST" action="/comment">
+	                  {% csrf_token %}
+	                  <input type="text" placeholder="Add a public comment" name="Add Comment">
+	                  <button type="submit" class="btn btn-default">Comment</button>
+
+	                </form>
+	            {% else %}
+
+	            	<p style="color: white"> <a href="/login" class="#">Log in</a> to place a comment!</p>
+
+	            {% endif %}
+                <button type="cancel" class="btn btn-default">Cancel</button>
+              </span>
+            </div>
+
+            {% for comment in comments %}
+            <div class="comment-box">
+              <span class="commenter-pic">
+                <img src="{% static "joke/img/anonymous_dad.jpeg" %}" class="img-fluid">
+              </span>
+              <span class="commenter-name">
+                <a href="#">{{comment.author}}</a><span class="comment-time">{{comment.datetime|timesince}} ago</span>
+              </span>
+              <p class="comment-txt more">{{comment.text}}</p>                    
+            </div>
+            {% endfor %}
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}

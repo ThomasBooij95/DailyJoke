@@ -135,3 +135,6 @@ STATIC_URL = '/static/'
 
 #Crispy forms CSS layout (standard is bootstrap 2, we already use 4 everywhere)
 CRISPY_TEMPLATE_PACK="bootstrap4"
+
+LOGIN_REDIRECT_URL = 'home'
+APPEND_SLASH=False

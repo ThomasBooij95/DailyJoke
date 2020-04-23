@@ -37,14 +37,14 @@ def register_view(request):
 def login_view(request):
 	if request.method == "POST":
 		form = AuthenticationForm(request.POST)
-		if form.is_valid():
-			print("FORM = VALID")
-			form.save()
-			return redirect("/")
-		else:
-			print("FORM = INVALID")
-	else:
-		form =AuthenticationForm()
+		# if form.is_valid():
+		# 	print("FORM = VALID")
+		form.authenticate()
+			# return redirect("/")
+		# else:
+		# 	print("FORM = INVALID")
+	# else:
+		# form =AuthenticationForm()
 		
 	# context = getContext()
 
