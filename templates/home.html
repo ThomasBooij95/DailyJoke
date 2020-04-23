@@ -67,8 +67,8 @@
 		              <span class="commenter-name">
 	                <form method="POST" action="/comment">
 	                  {% csrf_token %}
-	                  <input type="text" placeholder="Add a public comment" name="Add Comment">
-	                  <button type="submit" class="btn btn-default">Comment</button>
+	                  <input id="commentText" type="text" placeholder="Add a public comment" name="Add Comment">
+	                  <button type="submit" class="btn btn-default" onClick="return emptyCheck()">Comment</button>
 	                </form>
 	                
 	            {% else %}
@@ -98,5 +98,16 @@
       </div>
     </div>
   </div>
+
+  <script type="text/javascript">
+  function emptyCheck() {
+    var commentText;
+    commentText = document.getElementById("commentText").value;
+    if (commentText == "") {
+        alert("Enter a comment!");
+        return false;
+    };
+	}
+	</script>
 
 {% endblock %}
