@@ -2,11 +2,6 @@ from django.shortcuts import render, redirect
 from .forms import RegistrationForm
 from django.contrib.auth import login, authenticate
 
-
-def parse_refer(url):
-	split = url.split('/')
-	return split[-1]
-
 	
 def register_view(request):
 
