@@ -5,69 +5,66 @@
 {% load static %}
 
   <!-- Maak bootstrap container -->
+
   <div class="container-fluid top-buffer side-buffers">
     <!-- 25% can scherm leeg -->
     <div class="row container">
       <div class="row" >
-        <div class="col-md-10 col-xs-12" id="text-block" >
-
+        {# Onl large screens 10/12 width on smaller screen entire row #}
+        <div class="col-lg-10 col-xs-12" id="text-block" >
           <div class = "row">
             <p class="joke-text">{{joke}}</p>
           </div>  
           <div class="row float-right">
-          
             <div class="col auto">
-              
               <p class="like-number" > 
                 {{likes}} Likes! 
-              {# <img src="{% static "joke/img/check.png" %}" style="width: 20px; height: 20px; background: transparent;" class="img-fluid"> #}
               </p>
             </div>
           </div>
-
         </div>
-        {# login and register #}
-      	{% if user.is_authenticated %}
-           <div class="col-md-2 d-none d-md-block">
-      		    <p class="text-center" style="color: white">Hi {{user.username}}!</p>
-          </div>  
-      	{% else %}
-         <div class="col-md-2 col-xs-12">
-          {# <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalAuthenticationForm">Login</a> #}
+
+        {# THis collumn contains the rows with the like button and either 'Hi user' or login & registration buttons#}
+        {# on large screen this will be two columns on small screens it becomes an entire row #}
+        <div class="col-lg-2 col-xs-12">
+          {# login and register #}
+        	{% if user.is_authenticated %}
+          {# d-none d-md-block hides it when smaller than md #}
+             <div class="row-fluid d-none d-md-block">
+                
+        		    <p class="text-center" style="color: white">Hi {{user.username}}!</p>
+              </div>
+        	{% else %} 
+            {# <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalAuthenticationForm">Login</a> #}
+              <div class ="row-fluid">
+               <a href="/login" class="btn btn-primary btn-block">Log in</a>
+              </div>
+              <div class = "row-fluid" style="margin-top: 2%; margin-bottom: 2%">
+                 <a href="/register" class="btn btn-primary btn-block">Register</a>
+              </div>
+            
+          {% endif %}
+          {# <div class="col-lg-2 col-xs-12" id="button-col"> #}
             <div class ="row-fluid">
-             <a href="/login" class="btn btn-primary btn-block">Log in</a>
-            </div>
-            <div class = "row-fluid" style="margin-top: 2%; margin-bottom: 2%">
-               <a href="/register" class="btn btn-primary btn-block">Register</a>
-            </div>
+              {% if likedJoke %}
+                  <button class="btn btn-success btn-block"> Liked :) </button>
+              {% else %}
+                <form method="POST" action="/liked">
+                {% csrf_token %}
+                  <button type="submit" class="btn btn-outline-success btn-block"> Like! </button>
+               </form>
+              
+              {% endif %}
           </div>
-        {% endif %}
-
-      <div class="col-md-10 d-none d-sm-block"></div>
-
-      <div class="col-md-2 col-xs-12" id="button-col">
-
-        {% if likedJoke %}
-            <button class="btn btn-success btn-block"> Liked :) </button>
-        {% else %}
-          <form method="POST" action="/liked">
-          {% csrf_token %}
-            <button type="submit" class="btn btn-outline-success btn-block"> Like! </button>
-         </form>
-        
-        {% endif %}
+        </div> 
       </div>
-
-      </div>
-
-      
     </div>
-    </div>
+  </div>
     
 
     <div class="container side-buffers scrollable" style="margin-top: 2%">
       <div class="row">
-        <div class="col-md-12 col-xs-12 " >
+        <div class="col-lg-12 col-xs-12 " >
           <div class="comments" >
             <div class="comment-box add-comment">
 

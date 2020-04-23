@@ -1,7 +1,7 @@
 {#  Comment styling #}
 .scrollable{
     overflow-y: scroll; 
-    height: 60%; 
+    height: 70%; 
     position: absolute;
 }
 
@@ -36,7 +36,7 @@
     background-color: transparent;
     border: none;
     position: relative;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
 }
 .comments .commenter-pic {
     width: 50px;
