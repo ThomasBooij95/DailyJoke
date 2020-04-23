@@ -45,7 +45,7 @@
         <div class="col-2" id="button-col">
 
           {% if likedJoke %}
-              <button class="btn btn-success btn-block"> Like! </button>
+              <button class="btn btn-success btn-block"> Liked :) </button>
           {% else %}
           	<form method="POST" action="/liked">
   			    {% csrf_token %}
@@ -57,9 +57,9 @@
       </div>
 
     </div>
-    <div class="container side-buffers scrollable" style="margin-top: 2%">
+    <div class="container side-buffers" style="margin-top: 2%">
       <div class="row">
-        <div class="col-12" >
+        <div class="col-12 scrollable" >
           <div class="comments" >
             <div class="comment-box add-comment">
 
@@ -80,25 +80,23 @@
 		                <img src="{% static "joke/img/anonymous_dad.jpeg" %}" alt="Anonymous Dad" class="img-fluid">
 		              </span>		              	
 		              
-	                  <input id="commentText" type="text" placeholder="Only Dads can place comments" name="Add Comment">
+	                  <input id="commentText" type="text" placeholder="Only Dads can comment" name="Add Comment">
 	                  <button class="btn btn-primary">Comment</button>
-	                
-
 	            {% endif %}
-                
-              
+
             </div>
+
 
             {% for comment in comments %}
-            <div class="comment-box">
-              <span class="commenter-pic">
-                <img src="{% static "joke/img/anonymous_dad.jpeg" %}" class="img-fluid">
-              </span>
-              <span class="commenter-name">
-                <a href="">{{comment.user.username}}</a><span class="comment-time">{{comment.datetime|timesince}} ago</span>
-              </span>
-              <p class="comment-txt more">{{comment.text}}</p>                    
-            </div>
+              <div class="comment-box">
+                <span class="commenter-pic">
+                  <img src="{% static "joke/img/anonymous_dad.jpeg" %}" class="img-fluid">
+                </span>
+                <span class="commenter-name">
+                  <a href="">{{comment.user.username}}</a><span class="comment-time">{{comment.datetime|timesince}} ago</span>
+                </span>
+                <p class="comment-txt more">{{comment.text}}</p>                    
+              </div>
             {% endfor %}
 
 
@@ -108,6 +106,7 @@
     </div>
   </div>
 
+{# Checks if comment text input  is empty yes or no#}
   <script type="text/javascript">
   function emptyCheck() {
     var commentText;
