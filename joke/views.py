@@ -63,7 +63,7 @@ def like_view(request):
 def comment_view(request):
     if request.method== "POST":
         commentText = request.POST.get("Add Comment")
-        print(commentText)
+        print('Commented text: ',commentText)
 
         jokeNumber = getJokeNumber()
         jokes = Joke.objects.all()
