@@ -1,7 +1,7 @@
 {#  Comment styling #}
 .scrollable{
-    overflow-y: scroll; 
-    height: 80%; 
+    overflow: auto; 
+    
     position: absolute;
 }
 

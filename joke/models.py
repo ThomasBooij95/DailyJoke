@@ -22,15 +22,16 @@ class Joke(models.Model):
        
 class Comment(models.Model):
     joke = models.ForeignKey(Joke,on_delete=models.CASCADE)
-    author = models.TextField(default = "Anonymous Dad")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
-    likes = models.IntegerField(default=0)    
+    # likes = models.IntegerField(default=0)    
     
     datetime = models.DateTimeField(auto_now_add=True)
     
-    def addLike(self):
-        self.likes = self.likes + 1
-        self.save()
+    #Not needed anymore just as in Joke, we can refer number of comment likes from the CommentLike class
+    # def addLike(self):
+    #     self.likes = self.likes + 1
+    #     self.save()
 
     class Meta:
        ordering = ['-datetime']

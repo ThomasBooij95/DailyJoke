@@ -6,17 +6,17 @@ from django.contrib.auth.models import User
 
 def getContext(request):
 
-    current_user = request.user
-    current_joke = getCurrentJoke()
+    currentUser = request.user
+    currentJoke = getCurrentJoke()
 
     #Check if user liked the joke, gives boolean 
-    likedJoke = JokeLike.userLikedJoke(current_user = current_user, current_joke = current_joke)
-    comments = getComments(current_joke.id)
+    likedJoke = JokeLike.userLikedJoke(current_user = currentUser, current_joke = currentJoke)
+    comments = getComments(currentJoke.id)
 
-    likes = countJokeLikes(current_joke)
+    likes = countJokeLikes(currentJoke)
     # likedJoke = 
     context = {
-        "joke" : current_joke.joke,
+        "joke" : currentJoke.joke,
         "likes": likes,
         "comments" : comments,
         "likedJoke": likedJoke,
@@ -67,15 +67,15 @@ def countJokeLikes(joke):
 def like_view(request):
     if request.method=="POST":
         
-        current_user = request.user
-        current_joke = getCurrentJoke()
+        currentJoke = getCurrentJoke()
+        currentUser = request.user
 
         #Check if user liked the joke: True if liked, False if not liked
-        likedJoke = JokeLike.userLikedJoke(current_user = current_user, current_joke = current_joke)
+        likedJoke = JokeLike.userLikedJoke(current_user = currentUser, current_joke = currentJoke)
 
         if not likedJoke:
             #Add the like to the JokeLike table
-            jokeLike = JokeLike(user = current_user, joke = current_joke)
+            jokeLike = JokeLike(user = currentUser, joke = currentJoke)
             jokeLike.save()       
         else:
             print("Already liked this joke!")
@@ -87,11 +87,12 @@ def like_view(request):
 def comment_view(request):
     
     currentJoke = getCurrentJoke()
-
+    currentUser = request.user
     if request.method== "POST":
+        
         commentText = request.POST.get("Add Comment")
-        print('Commented text: ',commentText)
-        commentObject = Comment(text = commentText, joke = currentJoke)
+
+        commentObject = Comment(text = commentText, joke = currentJoke, user = currentUser)
         commentObject.save()
    
     return redirect("/")

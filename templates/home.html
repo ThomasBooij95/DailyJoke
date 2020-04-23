@@ -5,9 +5,9 @@
 {% load static %}
 
   <!-- Maak bootstrap container -->
-  <div class="container-fluid">
+  <div class="container-fluid side-buffer">
     <!-- 25% can scherm leeg -->
-    <div class="row top-buffer side-buffer" >
+    <div class="row top-buffer " >
       <div class="col-10" >
         <p id="text-block" class=joke-text>{{joke}}</p>
       </div>
@@ -95,7 +95,7 @@
                 <img src="{% static "joke/img/anonymous_dad.jpeg" %}" class="img-fluid">
               </span>
               <span class="commenter-name">
-                <a href="#">{{comment.author}}</a><span class="comment-time">{{comment.datetime|timesince}} ago</span>
+                <a href="">{{comment.user.username}}</a><span class="comment-time">{{comment.datetime|timesince}} ago</span>
               </span>
               <p class="comment-txt more">{{comment.text}}</p>                    
             </div>
