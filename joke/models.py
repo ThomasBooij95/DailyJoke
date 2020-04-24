@@ -24,6 +24,7 @@ class Comment(models.Model):
     joke = models.ForeignKey(Joke,on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
+    pic_id = models.TextField()
     # likes = models.IntegerField(default=0)    
     
     datetime = models.DateTimeField(auto_now_add=True)

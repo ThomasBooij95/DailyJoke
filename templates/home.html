@@ -74,7 +74,7 @@
 
               	{% if user.is_authenticated %}
 		             
-		              <img class = "commenter-pic" src="{% static "joke/img/anonymous_dad.jpeg" %}" alt="Anonymous Dad" class="img-fluid">
+		              <img class = "commenter-pic" src="{% static profile_pic %}" alt="Anonymous Dad" class="img-fluid">
 		              <span style="vertical-align: middle;"> <a href="" class="username">{{user.username}}</a> </span>
 
 	                <form method="POST" action="/comment">
@@ -86,7 +86,7 @@
 	            {% else %}
 
 	            	
-		                <img class = "commenter-pic" src="{% static "joke/img/anonymous_dad.jpeg" %}" alt="Anonymous Dad" class="img-fluid">
+		                <img class = "commenter-pic" src="{% static profile_pic %}" alt="Anonymous Dad" class="img-fluid">
                     <span style="vertical-align: middle;"> <a href="" class="username">Anonymous Dad</a> </span>
 
 	                  <input id="commentText" type="text" placeholder="Only Dads can comment" name="Add Comment">
@@ -99,7 +99,11 @@
             {% for comment in comments %}
               <div class="comment-box">
                 <span class="commenter-pic">
-                  <img src="{% static "joke/img/anonymous_dad.jpeg" %}" class="img-fluid">
+
+
+                  {% with "joke/img/"|add:comment.pic_id|add:".jpeg" as image_static %}
+                  <img src="{% static image_static %}" class="img-fluid">
+                  {% endwith %}
                 </span>
                 <span class="commenter-name">
                   <a href="">{{comment.user.username}}</a><span class="comment-time">{{comment.datetime|timesince}} ago</span>
@@ -128,7 +132,6 @@
   function becomeDad(){alert("You ain't no dad!");}
     
 
-  
 	</script>
 
 {% endblock %}
