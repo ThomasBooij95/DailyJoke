@@ -4,10 +4,25 @@ from datetime import datetime, date
 from django.contrib.auth.models import User
 # Create your views here.
 
+def getPicNumberUser(user):
+    
+    picnumber = str(user.id%8)
+    if user.is_superuser:
+        picnumber = "admin"
+    return picnumber
+
 def getContext(request):
 
     currentUser = request.user
     currentJoke = getCurrentJoke()
+
+
+    if currentUser.is_anonymous:
+        profile_pic = "joke/img/anonymous_dad.jpeg"
+    else:
+        picnumber = getPicNumberUser(currentUser)
+        profile_pic = "joke/img/"+picnumber+".jpeg"
+
 
     #Check if user liked the joke, gives boolean 
     likedJoke = JokeLike.userLikedJoke(current_user = currentUser, current_joke = currentJoke)
@@ -20,6 +35,8 @@ def getContext(request):
         "likes": likes,
         "comments" : comments,
         "likedJoke": likedJoke,
+        "profile_pic": profile_pic,
+
         }
     return context
 
@@ -90,8 +107,8 @@ def comment_view(request):
     if request.method== "POST":
         
         commentText = request.POST.get("Add Comment")
-
-        commentObject = Comment(text = commentText, joke = currentJoke, user = currentUser)
+        pic_id = getPicNumberUser(currentUser)
+        commentObject = Comment(text = commentText, joke = currentJoke, user = currentUser, pic_id = pic_id)
         commentObject.save()
    
     return redirect("/")
