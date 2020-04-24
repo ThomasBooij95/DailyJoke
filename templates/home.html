@@ -6,13 +6,13 @@
 
   <!-- Maak bootstrap container -->
 
-  <div class="container-fluid top-buffer side-buffers">
+  <div class="container-fluid top-buffer side-buffers ">
     <!-- 25% can scherm leeg -->
     <div class="row container">
       <div class="row" >
 
         {# Onl large screens 10/12 width on smaller screen entire row #}
-        <div class="col-lg-10 col-xs-12" id="text-block" >
+        <div class="col-10 col-xs-12" id="text-block" >
           <div class = "row">
             <p class="joke-text">{{joke}}</p>
           </div>  
@@ -27,7 +27,7 @@
 
         {# THis collumn contains the rows with the like button and either 'Hi user' or login & registration buttons#}
         {# on large screen this will be two columns on small screens it becomes an entire row #}
-        <div class="col-lg-2 col-xs-12">
+        <div class="col-2 col-xs-12">
           {# login and register #}
         	{% if user.is_authenticated %}
           {# d-none d-md-block hides it when smaller than md #}
@@ -65,7 +65,7 @@
 
     <div class="container side-buffers scrollable" style="margin-top: 2%">
       <div class="row">
-        <div class="col-lg-12 col-xs-12 " >
+        <div class="col-12 col-xs-12 " >
           <div class="comments" >
             <div class="comment-box add-comment">
 

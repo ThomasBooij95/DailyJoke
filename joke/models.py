@@ -58,10 +58,10 @@ class JokeLike(Like):
 
         userLikedJoke = JokeLike.objects.filter(user = current_user, joke = current_joke)
         # likedJokes = JokeLike.objects.get(user_id = user_id, joke_id = joke_id)
-        if not userLikedJoke:
-            #didnt like the joke yet
-            return False
+        if userLikedJoke:
+            #did like the joke
+            return True
 
         else:
-            #Did like to joke already
-            return True
+            #Did NOT ike to joke (*empty array)
+            return False

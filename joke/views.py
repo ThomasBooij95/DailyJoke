@@ -80,7 +80,6 @@ def like_view(request):
         else:
             print("Already liked this joke!")
 
-    context = getContext(request)
     return redirect('home')
 
 
