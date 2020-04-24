@@ -25,7 +25,7 @@ def parse_jokes(foundJokes):
 		parsedJoke = joke.split(">")[2].split("<")[0]
 		foundJokes[n] = parsedJoke
 		n+=1
-		# print("Joke " , n,": ", splitJoke)
+		
 	return foundJokes
 
 
@@ -33,6 +33,11 @@ foundJokes = get_page_content()
 parsedJokes = parse_jokes(foundJokes)
 
 
-#prints all jokes
+print("Adding ", np.size(parsedJokes), " jokes")
+count =0
 for joke in parsedJokes:
-	Joke.objects.create(joke = joke)
+	# Joke.objects.create(joke = joke)
+	jokeObject = Joke(joke = joke)
+	jokeObject.save()
+	count +=1
+print("Saved ", count, " jokes!")

@@ -43,9 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+
+    #external apps
+    "crispy_forms",
 
     #Our apps
-    'joke'
+    'joke',
+    'register'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +132,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#Crispy forms CSS layout (standard is bootstrap 2, we already use 4 everywhere)
+CRISPY_TEMPLATE_PACK="bootstrap4"
+
+LOGIN_REDIRECT_URL = 'home'

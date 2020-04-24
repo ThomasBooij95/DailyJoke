@@ -1,0 +1,22 @@
+
+div.fadeMe {
+  opacity:    .6; 
+  background: #000; 
+  width:      100%;
+  height:     100%; 
+  z-index:    10;
+  top:        0; 
+  left:       0; 
+  position:   fixed; 
+}
+
+/*div.formBlock{
+  position: fixed;
+  width: 50%;
+  height: 50%;
+  top-margin: 25%;
+  left-margin: 25%;
+  background: #000;
+  opacity: 1;
+}
+*/
