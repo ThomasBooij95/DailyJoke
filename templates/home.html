@@ -74,7 +74,7 @@
 
               	{% if user.is_authenticated %}
 		             
-		              <img class = "commenter-pic" src="{% static profile_pic %}" alt="Anonymous Dad" class="img-fluid">
+		              <img class = "commenter-pic img-fluid" src="{% static profile_pic %}" alt="Anonymous Dad">
 		              <span style="vertical-align: middle;"> <a href="" class="username">{{user.username}}</a> </span>
 
 	                <form method="POST" action="/comment">
@@ -86,7 +86,7 @@
 	            {% else %}
 
 	            	
-		                <img class = "commenter-pic" src="{% static profile_pic %}" alt="Anonymous Dad" class="img-fluid">
+		                <img class = "commenter-pic img-fluid" src="{% static profile_pic %}" alt="Anonymous Dad">
                     <span style="vertical-align: middle;"> <a href="" class="username">Anonymous Dad</a> </span>
 
 	                  <input id="commentText" type="text" placeholder="Only Dads can comment" name="Add Comment">
@@ -102,7 +102,7 @@
 
 
                   {% with "joke/img/"|add:comment.pic_id|add:".jpeg" as image_static %}
-                  <img src="{% static image_static %}" class="img-fluid">
+                  <img class = "commenter-pic img-fluid" src="{% static image_static %}">
                   {% endwith %}
                 </span>
                 <span class="commenter-name">
