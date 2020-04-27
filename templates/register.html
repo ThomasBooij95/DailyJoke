@@ -1,37 +1,32 @@
+{% extends 'base.html' %}
 
-{% extends 'base.html'%}
-
-{% block register %}
 {% load crispy_forms_tags %}
-<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        
-        <form method="POST" class="form-group">
-              {% csrf_token %}
 
-              {{form|crispy}}
+{% block content %}
 
-              <button type="submit" class = "btn btn-primary">Submit</button>
-          </form>
 
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button class="btn btn-default">Login</button>
+  <div class="modal fade in show" id="modalRegistrationForm" role="dialog" style="display: block">
+    <div class="modal-dialog" >
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Sign Up</h4>
+            <a href="/" class="close" aria-label="Close"></a>
+            <span>&times;</span>
+        </div>
+	        <div class="modal-body mx-3">
+	        	<form method="POST" class="form-group" >
+	            {% csrf_token %}
+
+	            {{form|crispy}}
+
+	            <button type="submit" class = "btn btn-primary">Submit</button>
+
+	          </form>
+
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div> 
 
 
-          
 {% endblock %}
-

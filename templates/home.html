@@ -1,7 +1,9 @@
 {% extends 'base.html'%}
 {% load humanize %}
 {% load crispy_forms_tags %}
-{% block home_content %}
+
+
+{% block content %}
 {% load static %}
 
   <!-- Maak bootstrap container -->
@@ -45,6 +47,11 @@
               </div>
             
           {% endif %}
+
+          {# Donate button #}
+           <div class="row-fluid">
+            <a href="/donate" class="btn btn-primary btn-block">Donate!</a>
+           </div>
           {# <div class="col-md-2 col-xs-12" id="button-col"> #}
             <div class ="row-fluid">
                {% if user.is_anonymous %}
@@ -59,7 +66,7 @@
                </form>
               
               {% endif %}
-          </div>
+              </div>
         </div> 
       </div>
     </div>
@@ -101,7 +108,7 @@
                 <span class="commenter-pic">
 
 
-                  {% with "joke/img/"|add:comment.pic_id|add:".jpeg" as image_static %}
+                  {% with "img/"|add:comment.pic_id|add:".jpeg" as image_static %}
                   <img class = "commenter-pic img-fluid" src="{% static image_static %}">
                   {% endwith %}
                 </span>

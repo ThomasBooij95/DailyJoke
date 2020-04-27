@@ -2,89 +2,41 @@ from django.shortcuts import render, redirect
 from .models import Joke,Comment,Like, JokeLike
 from datetime import datetime, date
 from django.contrib.auth.models import User
+from django.urls import reverse
+from django.http import JsonResponse
+import stripe
+from joke import utils
+
+# strip.api_key = "sk_test_cdUobjjSp9QDZqjGceXHnpzq00dKxZ6Awc"
+
+
 # Create your views here.
+def donate(request): 
 
-def getPicNumberUser(user):
-    
-    picnumber = str(user.id%8)
-    if user.is_superuser:
-        picnumber = "admin"
-    return picnumber
+    return render(request, 'donate.html')
 
-def getContext(request):
+def charge(request):
+    amount =5 
+    if request.method =="POST":
+        print('Data:', request.POST)
+    return redirect(reverse('success', args=[amount]))
 
-    currentUser = request.user
-    currentJoke = getCurrentJoke()
+def successMsg(request,args):
+    amount = args
+    context = {'amount':amount}
 
+    return render(request, 'success.html', context)
 
-    if currentUser.is_anonymous:
-        profile_pic = "joke/img/anonymous_dad.jpeg"
-    else:
-        picnumber = getPicNumberUser(currentUser)
-        profile_pic = "joke/img/"+picnumber+".jpeg"
-
-
-    #Check if user liked the joke, gives boolean 
-    likedJoke = JokeLike.userLikedJoke(current_user = currentUser, current_joke = currentJoke)
-    comments = getComments(currentJoke.id)
-
-    likes = countJokeLikes(currentJoke)
-    # likedJoke = 
-    context = {
-        "joke" : currentJoke.joke,
-        "likes": likes,
-        "comments" : comments,
-        "likedJoke": likedJoke,
-        "profile_pic": profile_pic,
-
-        }
-    return context
 
 def home_view(request):
-    context = getContext(request)
+    context = utils.getContext(request)
     return render(request, 'home.html', context)
-
-
-def getComments(jokeId):
-    allComments = Comment.objects.filter(joke_id = jokeId)
-    commentArray  = []
-
-    for comment in allComments:
-        commentArray.append(comment)
-
-    return commentArray
-
-def days_between(d1,d2):
-    d1 = datetime.strptime(d1, "%Y-%m-%d")
-    d2 = datetime.strptime(d2, "%Y-%m-%d")
-    return abs((d2 - d1).days)
-
-
-
-def getJokeNumber():
-    today = date.today().strftime("%Y-%m-%d")
-    date_begin= '2020-05-11'
-    jokeNr = days_between(today,date_begin)%100
-    return jokeNr
-
-def getCurrentJoke():
-    jokeNumber = getJokeNumber()
-    jokes = Joke.objects.all()
-    current_joke = jokes[jokeNumber]
-    return current_joke
-
-def countJokeLikes(joke):
-
-    #Counts number of times joke is in the JokeLike list
-    jokeEntries = JokeLike.objects.filter(joke = joke)
-    likes = jokeEntries.count()
-    return likes
 
 
 def like_view(request):
     if request.method=="POST":
         
-        currentJoke = getCurrentJoke()
+        currentJoke = utils.getCurrentJoke()
         currentUser = request.user
 
         #Check if user liked the joke: True if liked, False if not liked
@@ -102,19 +54,13 @@ def like_view(request):
 
 def comment_view(request):
     
-    currentJoke = getCurrentJoke()
+    currentJoke = utils.getCurrentJoke()
     currentUser = request.user
     if request.method== "POST":
         
         commentText = request.POST.get("Add Comment")
-        pic_id = getPicNumberUser(currentUser)
+        pic_id = utils.getPicNumberUser(currentUser)
         commentObject = Comment(text = commentText, joke = currentJoke, user = currentUser, pic_id = pic_id)
         commentObject.save()
    
     return redirect("/")
-
-def parse_refer(url):
-    split = url.split('/')
-    return split[-1]
-
-

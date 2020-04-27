@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+{% load static %}
+
+
+<div class="container-fluid top-buffer">
+	<div class ="row">
+		<div class="col-12">
+		<div id="box">
+			<img id="succes-icon" src="{% static '/img/success.jpeg' %}">
+			<h4 style="font-size: 30px; color:white">Thank you for your contribution of ${{amount}}!</h4>
+			<p style="color:white; max-width: 400px">Your support helps me fulfill my dream of teaching aspiring developers around the world! You should receive a receipt to the email you provided shortly :)</p>
+			<hr>
+			<a class="btn btn-primary" href="{% url 'home' %}">&#x2190;Back to donation page</a>
+		</div>
+	</div>
+	</div>
+</div>
+
+{% endblock %}

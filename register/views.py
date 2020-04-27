@@ -22,5 +22,7 @@ def register_view(request):
 	else:
 		form =RegistrationForm()
 	
-	return render(request, 'registration.html', {'form': form})
+	return render(request, 'register.html', {'form': form})
 
+def login_view(request):
+	return render(request, 'login.html')

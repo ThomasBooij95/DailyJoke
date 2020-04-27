@@ -17,17 +17,26 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from joke.views import home_view, like_view, comment_view
-from register.views import register_view
+from joke import views
+from register.views import register_view, login_view
 # from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path('', home_view, name='home'),
-    path('admin/', admin.site.urls),
-    path('liked', like_view),
-    path('comment', comment_view),
-    path('register', register_view),
-    # path('login', login_view),
+    #Joke app
+    path('', views.home_view, name='home'),
+    path('liked', views.like_view, name = "liked"),
+    path('comment', views.comment_view, name ='comment'),
+    path('donate', views.donate, name='donate'),
+    path('charge', views.charge, name='charge'),
+    path('success/<str:args>/', views.successMsg, name='success' ),
+    
+    #Register app
+    path('register', register_view, name ='register'),
+    path('login', login_view, name='login'),
+
+    #Django
     path('', include("django.contrib.auth.urls")),
+    path('admin', admin.site.urls, name = 'admin'),
+
 ]
