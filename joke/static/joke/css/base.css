@@ -82,3 +82,13 @@ margin-top: 15px;
     background-color: rgba(10,10,10,0.8);
     
 }
+
+@media (min-width: 514px){
+	body{
+	/* overflow:hidden; */
+}
+
+
+}
+
+
