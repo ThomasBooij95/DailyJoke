@@ -134,11 +134,9 @@
 (function($) {
     var $window = $(window),
         $html = $('#style-1');
-
     $window.resize(function resize(){
-        if ($window.width() < 514) {
-            return $html.removeClass('scrollable');
-        	console.log("Screen smaller then 514")
+        if ($window.width() < 514) { 
+			return $html.removeClass('scrollable');
 		}
 
         $html.addClass('scrollable');

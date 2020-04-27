@@ -85,10 +85,8 @@ margin-top: 15px;
 
 @media (min-width: 514px){
 	body{
-	/* overflow:hidden; */
+	overflow:hidden;
 }
-
-
 }
 
 
