@@ -17,6 +17,7 @@ def getContext(request):
     currentJoke = getCurrentJoke()
 
 
+
     if currentUser.is_anonymous:
         profile_pic = "joke/img/anonymous_dad.jpeg"
     else:
@@ -36,7 +37,7 @@ def getContext(request):
         "comments" : comments,
         "likedJoke": likedJoke,
         "profile_pic": profile_pic,
-
+        "author": currentJoke.author
         }
     return context
 
@@ -69,8 +70,13 @@ def getJokeNumber():
 
 def getCurrentJoke():
     jokeNumber = getJokeNumber()
-    jokes = Joke.objects.all()
-    current_joke = jokes[jokeNumber]
+    jokes = Joke.objects.all().filter(override=True)
+    print(jokes)
+    if not jokes: # When no jokes are featured with the admin
+        jokes = Joke.objects.all()
+        current_joke = jokes[jokeNumber]
+    else:
+        current_joke = jokes[0]
     return current_joke
 
 def countJokeLikes(joke):
