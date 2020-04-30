@@ -14,7 +14,7 @@
         {# Onl large screens 10/12 width on smaller screen entire row #}
         <div class="col-md-10 col-xs-12" id="text-block" >
           <div class = "row">
-            <p class="joke-text">{{joke}}</p>
+            <p class="joke-text">{{joke}}{% if author and author.strip %}-{{author}}{% else %}{% endif %}</p>
           </div>  
           <div class="row float-right">
             <div class="col auto">
