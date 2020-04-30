@@ -63,7 +63,7 @@ def days_between(d1,d2):
 
 def getJokeNumber():
     today = date.today().strftime("%Y-%m-%d")
-    date_begin= '2020-05-11'
+    date_begin= '2020-04-10'
     jokeNr = days_between(today,date_begin)%100
     return jokeNr
 
