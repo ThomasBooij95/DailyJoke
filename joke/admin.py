@@ -8,6 +8,7 @@ class JokeAdmin(admin.ModelAdmin):
     inlines = [
             CommentInline
             ]
+    list_display = ['id','joke','author','override']
     pass
 class CommentAdmin(admin.ModelAdmin):
 
@@ -15,4 +16,4 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Joke,JokeAdmin)
-admin.site.register(Comment,CommentAdmin)
+# admin.site.register(Comment,CommentAdmin)
