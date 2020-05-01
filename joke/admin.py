@@ -8,7 +8,8 @@ class JokeAdmin(admin.ModelAdmin):
     inlines = [
             CommentInline
             ]
-    list_display = ['id','joke','author','override']
+     
+    list_display = ['id','joke','author','override','getCommentCount']
     pass
 class CommentAdmin(admin.ModelAdmin):
 

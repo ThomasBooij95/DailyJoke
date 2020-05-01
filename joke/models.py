@@ -12,7 +12,11 @@ class Joke(models.Model):
     def addJoke(self, jokeText):
         self.joke = jokeText
         self.save()
-
+    def getCommentCount(self):
+        set = Comment.objects.filter(joke=self)
+        print(len(set))
+        return str(len(set))
+    getCommentCount.short_description = "Number of Comments"
 
 
        
