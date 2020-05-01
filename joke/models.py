@@ -7,12 +7,8 @@ from django.contrib.auth.models import User
 
 class Joke(models.Model):
     joke = models.TextField()
-    # likes = models.IntegerField(default=0)
-    # description = models.TextField(blank=True, null=True)
-    
-    # def addLike(self):
-    #     self.likes = self.likes + 1
-    #     self.save()
+    author =models.ForeignKey(User,blank=True, null = True,default= None,on_delete=models.CASCADE)
+    override = models.BooleanField(default=False)
     def addJoke(self, jokeText):
         self.joke = jokeText
         self.save()
