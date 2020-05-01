@@ -14,11 +14,9 @@ class Joke(models.Model):
         self.save()
     def getCommentCount(self):
         set = Comment.objects.filter(joke=self)
-        print(len(set))
-        return str(len(set))
+        return len(set)
     getCommentCount.short_description = "Number of Comments"
-
-
+    
        
 class Comment(models.Model):
     joke = models.ForeignKey(Joke,on_delete=models.CASCADE)

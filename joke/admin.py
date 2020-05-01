@@ -9,7 +9,7 @@ class JokeAdmin(admin.ModelAdmin):
             CommentInline
             ]
      
-    list_display = ['id','joke','author','override','getCommentCount']
+    list_display = ['id','joke','author','getCommentCount','override']
     pass
 class CommentAdmin(admin.ModelAdmin):
 
@@ -17,4 +17,3 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Joke,JokeAdmin)
-# admin.site.register(Comment,CommentAdmin)
