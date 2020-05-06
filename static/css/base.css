@@ -21,6 +21,10 @@ margin-left: 25px;
 margin-right: 25px;
 margin-top: 15px;
 }
+.justselect-wrapper  {
+color: black;
+}
+
 .divider{
     width:5px;
     height:auto;
