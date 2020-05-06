@@ -4,16 +4,52 @@ from datetime import datetime, date
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import JsonResponse
-import stripe
+
 from joke import utils
 
-# strip.api_key = "sk_test_cdUobjjSp9QDZqjGceXHnpzq00dKxZ6Awc"
+import time
+from mollie.api.client import Client
+from mollie.api.error import Error
+
+
 
 
 # Create your views here.
 def donate(request): 
 
-    return render(request, 'donate.html')
+    api_key = "test_bsjDvHFFe97grVyf9rnWpQnJd8p9P4"
+    mollie_client = Client()
+    mollie_client.set_api_key(api_key)
+
+    if request.method == "POST":
+        issuer_id = request.POST.get("issuer")    
+        # Generate a unique webshop order id for this example. It is important to include this unique attribute
+        # in the redirectUrl (below) so a proper return page can be shown to the customer.
+        #
+        my_webshop_id = int(time.time())
+        payment = mollie_client.payments.create({
+            'amount': {
+                'currency': 'EUR',
+                'value': '10.00'
+            },
+            'description': 'My first API payment',
+            'webhookUrl': 'http://127.0.0.1:8000/success',
+            'redirectUrl': 'http://127.0.0.1:8000/success',
+            'metadata': {
+                'my_webshop_id': str(my_webshop_id),
+            },
+            'method': 'ideal',
+            'issuer': issuer_id,
+        })
+        return redirect(payement.checkout_url)
+
+
+    issuers =  mollie_client.methods.get('ideal', include='issuers').issuers
+    context = {"issuers" : issuers}
+
+
+
+    return render(request, 'donate.html', context)
 
 def charge(request):
     amount =5 
