@@ -19,16 +19,20 @@
 
 		<form method="post" id="payment-form">
 			{% csrf_token %}
-			<p> Select your bank: </p>
-			<select name="issuer">'
+			<p> Selecteer je bank:</p>
+			<select name="issuer" class = "justselect">
 				{% for issuer in issuers %}
+				{% if forloop.first %}
+				<option selected="selected" value="{{issuer.id}}">{{issuer.name}}</option>
+				{% else %}
 				<option value="{{issuer.id}}">{{issuer.name}}</option>
+				{% endif %}	
 				{% endfor %}
 				<option value=""></select>
-			<button>OK</button>
+			<div class = "pt-2 "><button class ="btn btn-light" >Betaal</button></div>
 		</form>
 	</div>
-	<div class ="row pb-2"
+	<div class ="row pb-2 pt-2"
 		<p> Not a Dad yet? Become one </p><div class = "divider"></div> <a href="/register"> now!</a>
 	</div> 
 </div>
