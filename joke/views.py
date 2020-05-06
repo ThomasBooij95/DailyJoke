@@ -33,15 +33,15 @@ def donate(request):
                 'value': '10.00'
             },
             'description': 'My first API payment',
-            'webhookUrl': 'http://127.0.0.1:8000/success',
-            'redirectUrl': 'http://127.0.0.1:8000/success',
+            'webhookUrl': 'https://google.com',
+            'redirectUrl': 'http://google.com',
             'metadata': {
                 'my_webshop_id': str(my_webshop_id),
             },
             'method': 'ideal',
             'issuer': issuer_id,
         })
-        return redirect(payement.checkout_url)
+        return redirect(payment.checkout_url)
 
 
     issuers =  mollie_client.methods.get('ideal', include='issuers').issuers
